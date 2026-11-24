@@ -22,7 +22,7 @@ The three meet at one point: the **API Contract**, the Backend's OpenAPI documen
 
 1. Work locally against the unreleased contract: `OPENAPI_URL=../be-demo/docs/openapi/openapi.json` before `gen:api`.
 2. Merge the Backend PR into `dev`. CI then tags and releases a new Contract Version.
-3. Wait for the bot PR that moves the pinned Contract Version in the CMS or Storefront, and merge it.
+3. Wait for the `chore/contract-openapi-v*` PR that `contract-bump.yml` opens in the CMS or Storefront (daily, or on the next push to its `dev`), and merge it. A patch bump merges itself on green CI; a minor bump carries the `breaking-contract` label and needs your fixes on that branch first.
 4. Rebase the feature PR onto it and merge it only after that. CI regenerates the types from the pinned version and fails if the PR still depends on the local contract.
 
 Never merge a CMS or Storefront PR that only works with a locally generated contract.
