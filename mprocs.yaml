@@ -1,6 +1,6 @@
 # `mprocs` starts the infrastructure and all three applications, one tab each.
-# Ports: Storefront 3000, CMS 3001, Backend 8080. The env values below hold those
-# ports until each repository's own .env.example carries them.
+# Ports: Storefront 3000, CMS 3001, Backend 8080. Each repository sets its own port; the
+# Storefront reaches the Backend through its same-origin proxy (API_ORIGIN in its .env.local).
 # `mise exec` makes every app use its own repository's Node version.
 
 procs:
@@ -12,8 +12,8 @@ procs:
     cwd: be-demo
     shell: mise exec -- npm run start:dev
     env:
-      PORT: '8080'
-      FRONTEND_URL: http://localhost:3000
+      # Origin used for CORS and for links in emails; matches NEXT_PUBLIC_APP_URL of the Storefront.
+      FRONTEND_URL: http://127.0.0.1:3000
       SMTP_HOST: localhost
       SMTP_PORT: '1025'
       # Mailpit accepts any login; the Backend only sends mail when all four SMTP values are set.
@@ -22,10 +22,8 @@ procs:
 
   cms:
     cwd: cms
-    shell: mise exec -- npm run dev -- --port 3001 --strictPort
+    shell: mise exec -- npm run dev
 
   storefront:
     cwd: fe-ecommerce-nike-style
     shell: mise exec -- pnpm dev
-    env:
-      NEXT_PUBLIC_API_URL: http://localhost:8080/api
