@@ -36,6 +36,18 @@ for repo in "${repos[@]}"; do
     echo "   skill $skill"
   done
 
+  # Copilot reads .github/skills. A repository with its own mirroring script (the
+  # Backend's agents:sync, see its ADR 0014) keeps the mirror itself; otherwise copy.
+  if grep -q '"agents:sync"' "$dir/package.json" 2>/dev/null; then
+    (cd "$dir" && npm run --silent agents:sync >/dev/null)
+  elif [[ -d "$dir/.github/skills" ]]; then
+    for line in "${skills[@]}"; do
+      read -r _ skill <<<"$line"
+      rm -rf "$dir/.github/skills/$skill"
+      cp -R "$dir/.agents/skills/$skill" "$dir/.github/skills/$skill"
+    done
+  fi
+
   mkdir -p "$dir/docs/agents"
   cp "$ROOT/shared/agents/workspace.md" "$dir/docs/agents/workspace.md"
 
