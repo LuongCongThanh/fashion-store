@@ -1,0 +1,11 @@
+# The three application repositories live beside this one but are not part of it (docs/adr/0001).
+/be-demo/
+/cms/
+/fe-ecommerce-nike-style/
+
+.env
+.env.*
+!.env.example
+node_modules/
+.DS_Store
+.vscode/

@@ -1,0 +1,16 @@
+{
+  "folders": [
+    { "name": "workspace", "path": "." },
+    { "name": "backend", "path": "be-demo" },
+    { "name": "cms", "path": "cms" },
+    { "name": "storefront", "path": "fe-ecommerce-nike-style" }
+  ],
+  "settings": {
+    "files.exclude": {
+      "be-demo": true,
+      "cms": true,
+      "fe-ecommerce-nike-style": true
+    },
+    "editor.formatOnSave": true
+  }
+}

@@ -1,0 +1,44 @@
+# Bulk git and task runner for the three repositories.
+#   mani sync                  clone any repository that is missing
+#   mani run status --all      short git status everywhere
+#   mani run pull --all        fast-forward the current branch everywhere
+
+projects:
+  backend:
+    path: be-demo
+    url: https://github.com/LuongCongThanh/be-demo.git
+    tags: [api]
+  cms:
+    path: cms
+    url: https://github.com/LuongCongThanh/fashion-store-cms.git
+    tags: [web]
+  storefront:
+    path: fe-ecommerce-nike-style
+    url: https://github.com/LuongCongThanh/fe-ecommerce-nike-style.git
+    tags: [web]
+
+specs:
+  default:
+    output: table
+    parallel: true
+
+tasks:
+  status:
+    desc: branch, ahead/behind and changed files
+    cmd: git status -sb
+
+  fetch:
+    desc: fetch all remotes and prune deleted branches
+    cmd: git fetch --all --prune
+
+  pull:
+    desc: fast-forward the current branch (never merges)
+    cmd: git pull --ff-only
+
+  branch:
+    desc: current branch name
+    cmd: git branch --show-current
+
+  dev:
+    desc: switch to dev and fast-forward it
+    cmd: git switch dev && git pull --ff-only

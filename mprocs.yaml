@@ -1,0 +1,31 @@
+# `mprocs` starts the infrastructure and all three applications, one tab each.
+# Ports: Storefront 3000, CMS 3001, Backend 8080. The env values below hold those
+# ports until each repository's own .env.example carries them.
+# `mise exec` makes every app use its own repository's Node version.
+
+procs:
+  infra:
+    shell: docker compose up
+    stop: SIGTERM
+
+  backend:
+    cwd: be-demo
+    shell: mise exec -- npm run start:dev
+    env:
+      PORT: '8080'
+      FRONTEND_URL: http://localhost:3000
+      SMTP_HOST: localhost
+      SMTP_PORT: '1025'
+      # Mailpit accepts any login; the Backend only sends mail when all four SMTP values are set.
+      SMTP_USER: local
+      SMTP_PASS: local
+
+  cms:
+    cwd: cms
+    shell: mise exec -- npm run dev -- --port 3001 --strictPort
+
+  storefront:
+    cwd: fe-ecommerce-nike-style
+    shell: mise exec -- pnpm dev
+    env:
+      NEXT_PUBLIC_API_URL: http://localhost:8080/api

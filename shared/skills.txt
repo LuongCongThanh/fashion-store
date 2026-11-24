@@ -1,0 +1,12 @@
+# Skills installed into every repository by scripts/sync.sh.
+# One skill per line: <source> <skill-name>. Repository-specific skills stay in each repository.
+mattpocock/skills code-review
+mattpocock/skills codebase-design
+mattpocock/skills diagnosing-bugs
+mattpocock/skills domain-modeling
+mattpocock/skills grilling
+mattpocock/skills grill-with-docs
+mattpocock/skills tdd
+mattpocock/skills to-spec
+mattpocock/skills to-tickets
+OWASP/secure-agent-playbook api-security-review

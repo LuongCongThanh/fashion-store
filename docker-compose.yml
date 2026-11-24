@@ -1,0 +1,25 @@
+# Local infrastructure only. PostgreSQL runs natively on the machine (see README),
+# and the three applications run through mprocs, not in containers.
+# Do not run this together with be-demo/docker-compose.yml: both bind Redis on 6379.
+name: fashion-store
+
+services:
+  redis:
+    image: redis:8-alpine
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+
+  # Catches every email the Backend sends. Web UI: http://localhost:8025, SMTP: localhost:1025.
+  mailpit:
+    image: axllent/mailpit:v1.27
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
+volumes:
+  redis-data:

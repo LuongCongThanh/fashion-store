@@ -1,0 +1,11 @@
+# Tool versions for the whole workspace. Run `mise install` once per machine.
+# Inside each repository, mise reads its .nvmrc, so the CMS still gets Node 22.
+
+[tools]
+node = "24"
+pnpm = "11.24.0"
+"github:alajmo/mani" = "latest"
+"github:pvolok/mprocs" = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
