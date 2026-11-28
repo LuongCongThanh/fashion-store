@@ -23,8 +23,8 @@ E2E giao diện trong từng app (Playwright với API mock) vẫn giữ cho ph�
 
 ## Thiết kế runner
 
-- **Vị trí**: thư mục `e2e/` của repo workspace, một project Playwright riêng; không đặt trong repo ứng dụng nào vì hành trình đi qua nhiều ứng dụng.
-- **Khởi động**: script khởi động Redis, Mailpit, Backend (`DATABASE_URL` trỏ `fashion_store_e2e`), stub provider, rồi Storefront và CMS ở chế độ build production, tắt MSW.
+- **Vị trí**: thư mục `e2e/` của repo workspace, một project Playwright riêng; không đặt trong repo ứng dụng nào vì hành trình đi qua nhiều ứng dụng ([ADR 0003](../adr/0003-full-stack-e2e-in-workspace.md)).
+- **Khởi động**: script khởi động Redis, Mailpit, Backend (`DATABASE_URL` trỏ `fashion_store_e2e`), stub provider (script test của Backend, vì Backend sở hữu code ký), rồi Storefront và CMS ở chế độ build production, tắt MSW.
 - **Dữ liệu**: `prisma migrate reset --force` + `db:seed` một lần mỗi lần chạy; mỗi test tự tạo dữ liệu của mình (Biến thể, Voucher, Tài khoản) qua API Admin, với mã duy nhất theo test.
 - **Thời gian**: test cần mốc thời gian (hết Giữ hàng, hết link thanh toán, hết hạn Đổi trả) tua qua endpoint `Clock` chỉ bật trong môi trường test của Backend; endpoint này không tồn tại ở build production.
 - **Locator**: theo role, label hoặc `data-testid`; không theo class CSS. Không `waitForTimeout`; chờ theo trạng thái UI hoặc API.

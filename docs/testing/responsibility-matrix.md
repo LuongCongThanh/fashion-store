@@ -1,4 +1,4 @@
-# Ma trận trách nhiệm FE và BE
+# Ma trận trách nhiệm Backend, CMS và Storefront
 
 Mỗi dòng nói tầng nào bảo vệ kiểu lỗi nào cho một luật. Backend là nguồn sự thật cho mọi luật nghiệp vụ; CMS và Storefront chỉ phục vụ trải nghiệm và hiển thị đúng điều Backend trả. Cột E2E chỉ ghi khi luật nằm trong một [hành trình quan trọng](critical-journeys.md).
 
@@ -19,7 +19,7 @@ Mỗi dòng nói tầng nào bảo vệ kiểu lỗi nào cho một luật. Back
 | BR-PAY-06 (hạn mức COD)            | Ẩn hoặc vô hiệu COD khi vượt mức, giải thích lý do                 | Từ chối COD vượt mức                                                                  | —   |
 | BR-PAY-01 (đổi Cổng khi thử lại)   | Cho chọn VNPay/MoMo mỗi lần trả, hiện thời gian còn lại            | Không tạo link mới từ phút 7; link hết hạn phút 10                                    | J6  |
 | BR-PAY-02 (Return URL)             | Trang kết quả chỉ đọc trạng thái từ Backend, không tự báo "đã trả" | Chỉ xác nhận qua IPN hoặc Đối soát                                                    | J6  |
-| BR-PAY-03, BR-PAY-04, BR-PAY-05    | —                                                                  | Webhook trùng xử lý một lần; sai số tiền không xác nhận và tự tạo Hoàn tiền           | J6  |
+| BR-PAY-03, BR-PAY-04, BR-PAY-05    | —                                                                  | IPN lặp xử lý một lần; sai số tiền không xác nhận và tự tạo Hoàn tiền                 | J6  |
 | BR-ORD-04 (địa chỉ 2 cấp)          | Validate form, focus lỗi đầu tiên, chọn tỉnh → phường/xã           | Validate schema và mã hành chính                                                      | J1  |
 | BR-SHP-02 (phí dự phòng)           | Hiển thị phí Backend trả, không tự đặt phí                         | GHN lỗi → phí dự phòng + Cờ cần xử lý                                                 | —   |
 | US-401, US-402 (xem đơn)           | Ẩn đơn không thuộc phiên                                           | Ownership: Người mua chỉ đọc đơn của mình; Khách vãng lai theo Mã đơn + số điện thoại | J7  |
@@ -47,6 +47,6 @@ Mỗi dòng nói tầng nào bảo vệ kiểu lỗi nào cho một luật. Back
 | Rủi ro                                | Ai bảo vệ                                                                      |
 | ------------------------------------- | ------------------------------------------------------------------------------ |
 | Backend đổi response mà quên OpenAPI  | Backend CI: `openapi:write` + `git diff --exit-code docs/openapi/openapi.json` |
-| FE dùng field không còn tồn tại       | CMS và Storefront CI: `gen:api` + diff client sinh + typecheck                 |
+| CMS, Storefront dùng field đã bỏ      | CMS và Storefront CI: `gen:api` + diff client sinh + typecheck                 |
 | Breaking Change lọt vào bản phát hành | Luồng Contract Version của workspace (`shared/agents/workspace.md`)            |
-| Mapper FE hiểu sai dữ liệu hợp lệ     | Unit test mapper với payload lấy từ schema sinh, không viết tay kiểu dữ liệu   |
+| Mapper ở CMS, Storefront hiểu sai     | Unit test mapper với payload lấy từ schema sinh, không viết tay kiểu dữ liệu   |

@@ -9,7 +9,7 @@
 | Nightly   | E2E full-stack J0–J9 (các hành trình đã chạy được), mutation testing, browser matrix (Chromium, Firefox, WebKit) cho Storefront                                  | CI của repo workspace |
 | Release   | Smoke thủ công với sandbox thật của VNPay, MoMo, GHN; xem kết quả nightly gần nhất                                                                               | Thủ công              |
 
-E2E full-stack bắt đầu ở nightly. Khi đã ổn định (không flaky trong 2 tuần liên tục), chuyển J0, J1, J7 thành gate của PR vào `dev` ở Backend và Storefront.
+E2E full-stack bắt đầu ở nightly. Khi bộ này đã ổn định, người dùng quyết định hành trình nào thành gate của PR vào `dev`.
 
 ## Gate không bù được bằng điểm
 
@@ -43,21 +43,18 @@ Một gate fail thì không merge (PR) hoặc không release, dù điểm audit 
 - Giá áp dụng và mức giảm của Giá khuyến mãi (BR-PRC-03, BR-PRC-04).
 - Số lượng bán được, Giữ hàng, Hàng chờ xuất (BR-INV-02, BR-INV-05, BR-INV-10).
 - Chuyển trạng thái Đơn hàng T1–T14.
-- Số tiền Hoàn tiền lũy kế (BR-RET-07) và giới hạn Hoàn tiền (BR-REF-06), khi đã build.
 
 Ví dụ mutant phải bị giết: `available >= quantity` đổi thành `available > quantity` → test đặt đúng bằng Số lượng bán được phải fail.
 
 ## N/A và lý do
 
-| Hạng mục                                                            | Trạng thái                   | Lý do                                                                     | Bật lại khi                |
-| ------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------- | -------------------------- |
-| Load và stress test (k6)                                            | N/A                          | Chưa có môi trường staging; không chạy tải trên máy dev hay provider thật | Có staging                 |
-| Rehearsal migration trên dữ liệu đại diện, backup/restore           | N/A                          | Chưa có dữ liệu production                                                | Có staging hoặc production |
-| Chaos testing                                                       | N/A                          | Một instance, chưa có hạ tầng phân tán                                    | Chạy nhiều instance        |
-| Pact                                                                | N/A                          | OpenAPI + client sinh + diff đã bảo vệ hợp đồng                           | Có consumer ngoài ba app   |
-| Đa tiền tệ, đa Kho, marketplace, subscription                       | N/A                          | Ngoài phạm vi MVP (BR-INV-01: một Kho; giá VND)                           | Phạm vi đổi                |
-| OAuth account linking, MFA cho Staff (ACCOUNTS-07, 08 của handbook) | Khoảng trống cần BA xác nhận | Có đăng nhập Google (US-502) nhưng chưa có luật về liên kết hoặc MFA      | BA bổ sung luật            |
-| Review sản phẩm, moderation (SEARCH-06, 07)                         | N/A                          | Không có trong phạm vi MVP                                                | Có user story              |
-| Unsubscribe marketing (SEARCH-11)                                   | N/A                          | MVP chỉ gửi email giao dịch (BR-NTF-01)                                   | Có email marketing         |
-| Import CSV, bulk action (CMS-03, 04 của handbook)                   | N/A                          | Không có user story                                                       | Có user story              |
-| Visual regression bằng dịch vụ ngoài (Chromatic, Percy)             | N/A                          | Chưa có ngân sách; dùng screenshot Playwright khi cần                     | Có ngân sách               |
+Hạng mục kiểm thử không áp dụng cho project. Kịch bản N/A hoặc khoảng trống của handbook nằm ở [handbook-mapping.md](handbook-mapping.md).
+
+| Hạng mục                                                  | Trạng thái | Lý do                                                                     | Bật lại khi                |
+| --------------------------------------------------------- | ---------- | ------------------------------------------------------------------------- | -------------------------- |
+| Load và stress test (k6)                                  | N/A        | Chưa có môi trường staging; không chạy tải trên máy dev hay provider thật | Có staging                 |
+| Rehearsal migration trên dữ liệu đại diện, backup/restore | N/A        | Chưa có dữ liệu production                                                | Có staging hoặc production |
+| Chaos testing                                             | N/A        | Một instance, chưa có hạ tầng phân tán                                    | Chạy nhiều instance        |
+| Pact                                                      | N/A        | OpenAPI + client sinh + diff đã bảo vệ hợp đồng                           | Có consumer ngoài ba app   |
+| Đa tiền tệ, đa Kho, marketplace, subscription             | N/A        | Ngoài phạm vi MVP (BR-INV-01: một Kho; giá VND)                           | Phạm vi đổi                |
+| Visual regression bằng dịch vụ ngoài (Chromatic, Percy)   | N/A        | Chưa có ngân sách; dùng screenshot Playwright khi cần                     | Có ngân sách               |
