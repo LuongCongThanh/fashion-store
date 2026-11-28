@@ -4,7 +4,7 @@ Mỗi kịch bản trong `ecommerce-testing-handbook/08-master-checklist.md` (be
 
 - **Luật**: khớp một luật của project; kiểm ở các dòng traceability ghi trong cột Ánh xạ (`BR-*`, `T*`, `US-*`, `CMP-*` ở Backend; `CMS-*` ở CMS; `SF-*` ở Storefront).
 - **N/A**: không áp dụng cho project, kèm lý do.
-- **BA**: rủi ro thật nhưng luật chưa nói tới; cần BA xác nhận trước khi viết test. Danh sách gom ở [cuối file](#khoảng-trống-cần-ba-xác-nhận).
+- **BA**: rủi ro thật nhưng luật chưa nói tới; cần người phân tích nghiệp vụ (BA, người viết `be-demo/docs/business/`) xác nhận trước khi viết test. Danh sách gom ở [cuối file](#khoảng-trống-cần-ba-xác-nhận).
 
 ## Tài khoản và phân quyền
 
@@ -193,7 +193,7 @@ Mỗi kịch bản trong `ecommerce-testing-handbook/08-master-checklist.md` (be
 | SEARCH-05 | N/A: không có search index riêng, tìm trực tiếp trên tên (BR-CAT-13) |
 | SEARCH-06 | N/A: không có review trong MVP                                       |
 | SEARCH-07 | N/A: không có review trong MVP                                       |
-| SEARCH-08 | SF bảo mật (không render HTML thô từ Backend)                        |
+| SEARCH-08 | SF-SEC-01                                                            |
 | SEARCH-09 | BR-NTF-01                                                            |
 | SEARCH-10 | BR-NTF-01, dòng Outbox                                               |
 | SEARCH-11 | CMP-03. Gửi email marketing: N/A, MVP chưa gửi                       |

@@ -10,7 +10,7 @@ This is the coordination repository for three separate application repositories.
 | CMS | `cms/` | Vue, Vite, Nuxt UI | npm | 3001 |
 | Storefront | `fe-ecommerce-nike-style/` | Next.js | pnpm | 3000 |
 
-- This repository never contains application code. The three folders are ignored here. Commit application changes inside the application's own repository.
+- This repository never contains application code. The three folders are ignored here. One exception: the full-stack E2E suite in `e2e/` (ADR 0003), which only drives the running applications over HTTP and the browser. Commit application changes inside the application's own repository.
 - Each application repository has its own `AGENTS.md` / `CLAUDE.md`, commit rules and PR template. **Once you work inside an application folder, its rules win over this file.**
 - Every application PR targets `dev` and merges with a squash.
 - The Backend rejects commit messages that name AI tools or carry AI attribution lines. Write "every agent" instead of a tool name.

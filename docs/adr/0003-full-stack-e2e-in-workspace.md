@@ -12,4 +12,4 @@ The full-stack journeys (`docs/testing/critical-journeys.md`) run the Storefront
 
 - `e2e/` gets its own `package.json` and lockfile; its dependencies are tools only (Playwright), never an application package.
 - The suite runs nightly from this repository's CI, checking out the three applications at the branches under test.
-- The VNPay, MoMo and GHN stubs live in the Backend repository as a test-only tool, because the Backend's own API tests use them too and they must sign with the Backend's real signing code. The suite starts them through a Backend npm script, so this repository never copies or imports Backend code.
+- The VNPay, MoMo and GHN stubs live in the Backend repository as a test-only tool, because the Backend's own API tests use them too and they must sign with the Backend's real signing code. The Backend will add an npm script that starts them, and the suite will call that script, so this repository never copies or imports Backend code.
