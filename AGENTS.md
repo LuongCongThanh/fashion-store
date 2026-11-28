@@ -28,6 +28,10 @@ This is the coordination repository for three separate application repositories.
 - Before a change that touches more than one application, check every affected repository is clean (`mani run status --all`), and give each one its own branch and PR.
 - The API Contract flow (Contract Versions, Breaking Changes, merge order for a feature that spans the Backend and a consumer) is in [shared/agents/workspace.md](shared/agents/workspace.md). Follow it exactly.
 
+## Testing
+
+- The testing strategy for all three applications (risk levels, FE/BE responsibility, full-stack journeys, gates, audit) is in [docs/testing/](docs/testing/README.md). Each application keeps its own strategy and traceability in its repository.
+
 ## Shared files
 
 - `shared/skills.txt` lists the skills every repository gets. `shared/agents/workspace.md` is copied to `docs/agents/workspace.md` in each repository.
