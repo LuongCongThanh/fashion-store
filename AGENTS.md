@@ -10,7 +10,7 @@ This is the coordination repository for three separate application repositories.
 | CMS | `cms/` | Vue, Vite, Nuxt UI | npm | 3001 |
 | Storefront | `fe-ecommerce-nike-style/` | Next.js | pnpm | 3000 |
 
-- This repository never contains application code. The three folders are ignored here. Commit application changes inside the application's own repository.
+- This repository never contains application code. The three folders are ignored here. One exception: the full-stack E2E suite in `e2e/` (ADR 0003), which only drives the running applications over HTTP and the browser. Commit application changes inside the application's own repository.
 - Each application repository has its own `AGENTS.md` / `CLAUDE.md`, commit rules and PR template. **Once you work inside an application folder, its rules win over this file.**
 - Every application PR targets `dev` and merges with a squash.
 - The Backend rejects commit messages that name AI tools or carry AI attribution lines. Write "every agent" instead of a tool name.
@@ -27,6 +27,10 @@ This is the coordination repository for three separate application repositories.
 - `mani run status --all`, `mani run pull --all`, `mani run dev --all` (see `mani.yaml`).
 - Before a change that touches more than one application, check every affected repository is clean (`mani run status --all`), and give each one its own branch and PR.
 - The API Contract flow (Contract Versions, Breaking Changes, merge order for a feature that spans the Backend and a consumer) is in [shared/agents/workspace.md](shared/agents/workspace.md). Follow it exactly.
+
+## Testing
+
+- The testing strategy for all three applications (risk levels, FE/BE responsibility, full-stack journeys, gates, audit) is in [docs/testing/](docs/testing/README.md). Each application keeps its own strategy and traceability in its repository.
 
 ## Shared files
 
